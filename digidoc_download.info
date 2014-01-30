@@ -1,0 +1,6 @@
+name = DigiDoc download
+description = Removes the DigiDoc XML wrapper from files
+core = 7.x
+package = DigiDoc
+version = 7.x-1.0-beta1
+project = digidoc_download
