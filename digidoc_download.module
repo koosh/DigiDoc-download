@@ -78,7 +78,8 @@ function digidoc_download_ddoc_download() {
         drupal_goto(file_create_url($zip_uri));
       }
       else {
-        return 'error 2';
+        drupal_set_message(t('Could not create zip archive for @file.', array('@file' => $target)), $type = 'error');
+        return '';
       }
     }
     // Single file.
@@ -99,7 +100,8 @@ function digidoc_download_ddoc_download() {
     }
   }
   else {
-    return 'error 1';
+    drupal_set_message(t('The @file has no files embedded.', array('@file' => $target)), $type = 'error');
+    return '';
   }
 }
 
