@@ -55,6 +55,11 @@ function digidoc_download_ddoc_download() {
   // Open the ddoc XML.
   $ddoc = simplexml_load_file($uri);
 
+  if(!$ddoc) {
+      drupal_set_message(t('The @file is not and XML file.', array('@file' => $target)), 'error');
+      return;
+  }
+
   if(isset($ddoc->DataFile) && $ddoc->DataFile) {
     // Multiple files, create a zip.
     if(isset($ddoc->DataFile[1])) {
@@ -78,8 +83,8 @@ function digidoc_download_ddoc_download() {
         drupal_goto(file_create_url($zip_uri));
       }
       else {
-        drupal_set_message(t('Could not create zip archive for @file.', array('@file' => $target)), $type = 'error');
-        return '';
+        drupal_set_message(t('Could not create zip archive for @file.', array('@file' => $target)), 'error');
+        return;
       }
     }
     // Single file.
@@ -100,8 +105,8 @@ function digidoc_download_ddoc_download() {
     }
   }
   else {
-    drupal_set_message(t('The @file has no files embedded.', array('@file' => $target)), $type = 'error');
-    return '';
+    drupal_set_message(t('The @file has no files embedded.', array('@file' => $target)), 'error');
+    return;
   }
 }
 
@@ -124,9 +129,9 @@ function digidoc_file_mimetype_mapping_alter(&$mapping) {
     }
 
     // Get the index of the mime type and assign the extension to that key.
-      $index = array_search($mime_type, $mapping['mimetypes']);
-      $mapping['extensions'][$extension] = $index;
-    }
+    $index = array_search($mime_type, $mapping['mimetypes']);
+    $mapping['extensions'][$extension] = $index;
+  }
 }
 
 /**
@@ -143,7 +148,6 @@ function digidoc_download_is_ddoc($path) {
 
   return FALSE;
 }
-
 
 /**
  * Extends DrupalPublicStreamWrapper to redirect DigiDoc file downloads.
