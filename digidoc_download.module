@@ -120,7 +120,7 @@ function digidoc_file_mimetype_mapping_alter(&$mapping) {
   // Add support for ddoc.
   $new_mappings['ddoc'] = 'application/ddoc';
   // Add support for bdoc.
-  //$new_mappings['bdoc'] = 'application/vnd.etsi.asic-e+zip';
+  $new_mappings['bdoc'] = 'application/vnd.etsi.asic-e+zip';
 
   foreach ($new_mappings as $extension => $mime_type) {
     if (!in_array($mime_type, $mapping['mimetypes'])) {
