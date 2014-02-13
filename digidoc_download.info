@@ -4,3 +4,6 @@ core = 7.x
 package = DigiDoc
 version = 7.x-1.0-beta1
 project = digidoc_download
+
+files[] = DrupalPublicStreamDigiDocWrapper.inc
+files[] = DrupalPrivateStreamDigiDocWrapper.inc
